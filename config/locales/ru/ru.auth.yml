@@ -1,0 +1,7 @@
+ru:
+  auth:
+    github:
+      success: Успешный вход через GitHub!
+      failure: Ошибка при входе через GitHub.
+      logout: Вы успешно вышли.
+      
