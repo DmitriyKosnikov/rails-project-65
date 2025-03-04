@@ -22,6 +22,10 @@ gem "stackprof"
 gem "sentry-ruby"
 gem "sentry-rails"
 
+gem 'dotenv-rails'
+
+gem 'active_storage_validations'
+
 # Gems for tests
 gem 'faker'
 gem 'minitest'
@@ -70,7 +74,6 @@ group :development, :test do
   gem "sqlite3", ">= 2.1"
 
   gem 'dotenv'
-  gem 'dotenv-rails'
 end
 
 group :development do
@@ -87,3 +90,5 @@ end
 group :production do
   gem "pg"
 end
+
+gem "pundit", "~> 2.5"

@@ -1,2 +1,13 @@
 ru:
+  application:
+      admin: Админка
+      title: Доска объявлений
+      new: Добавить
+      home: Главная
+      my_bulletins: My bulletins
+  navbar:
+    login: Войти
+    logout: Выйти
+    new: Добавить
   hello: Привет Мир!
+  title: Доска объявлений

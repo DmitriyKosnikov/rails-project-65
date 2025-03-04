@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
-  scope module: :web do
+  scope module: 'web' do
     post 'auth/:provider', to: 'auth#request', as: :auth_request
     get 'auth/:provider/callback', to: 'auth#callback', as: :callback_auth
-    resources 'auth', only: :destroy
+    delete 'logout', to: 'auth#destroy', as: :logout
+
+    resources :bulletins, except: :index
+
+    root 'bulletins#index'
   end
-  get "up" => "rails/health#show", as: :rails_health_check
 end

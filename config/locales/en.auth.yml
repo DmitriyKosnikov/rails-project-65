@@ -1,6 +1,6 @@
 en:
   auth:
     github:
-      success: Signed in successfully through GitHub!
+      success: Loged in successfully through GitHub!
       failure: An error while logging in through GitHub.
       logout: Log out successfully.

@@ -1,0 +1,9 @@
+= simple_form_for @bulletin do |f|
+  .form_inputs
+    = f.input :title
+    = f.input :description
+    = f.association :category, required: true
+    = f.input :image, as: :file, required: true
+
+  .form_actions
+    = f.submit @bulletin.new_record? ? t('simple_form.labels.submit_new') : t('simple_form.labels.submit_edit'), class: 'btn btn-primary'

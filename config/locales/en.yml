@@ -28,4 +28,15 @@
 #       enabled: "ON"
 
 en:
+  application:
+    title: Bulletin board
+    new: Add
+    home: Home
+    my_bulletins: My bulletins
+  
+  navbar:
+    login: Log in
+    logout: Log out
+    new: Add
   hello: "Hello world"
+  title: Bulletin board

@@ -1,0 +1,14 @@
+en:
+  activerecord:
+    attributes:
+      user:
+        email: Email
+        name: Name
+      bulletin:
+        title: Title
+        description: Description
+        image: Image
+    models:
+      user: User
+      bulletin: Bulletin
+      category: Category
