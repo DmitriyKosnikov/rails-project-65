@@ -8,6 +8,20 @@ en:
         title: Title
         description: Description
         image: Image
+    errors:
+      models:
+        bulletin:
+          attributes:
+            title:
+              blank: cant be blank
+              too_long: cant be longer than 50 symbols
+            description:
+              blank: cant be blank
+              too_long: cant be longer than 1000 symbols
+            category:
+              required: required
+            image:
+              blank: required
     models:
       user: User
       bulletin: Bulletin

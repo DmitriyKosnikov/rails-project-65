@@ -5,9 +5,24 @@ ru:
         email: Электронная почта
         name: Имя
       bulletin:
+        category: Категория
         title: Заголовок
         description: Описание
         image: Фотография
+    errors:
+      models:
+        bulletin:
+          attributes:
+            title:
+              blank: не может быть пустым
+              too_long: не может быть более 50 символов
+            description:
+              blank: не может быть пустым
+              too_long: не может быть более 1000 символов
+            category:
+              required: обязательное поле
+            image:
+              blank: обязательна
     models:
       user: Пользователь
       bulletin: Объявление

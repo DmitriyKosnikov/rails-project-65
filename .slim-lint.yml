@@ -1,7 +1,6 @@
 exclude:
   - vendor/*
   - node_modules/*
-  - '**/devise/**/*.slim'
 
 linters:
 

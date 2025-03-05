@@ -1,0 +1,22 @@
+ru:
+  simple_form:
+    "yes": 'Да'
+    "no": 'Нет'
+    required:
+      text: 'обязательное'
+      mark: '*'
+    error_notification:
+      default_message: "Пожалуйста, обратите внимание на ошибки внизу"
+    labels:
+      bulletin:
+        submit_new: Создать объявление
+        submit_edit: Обновить       
+        title: Заголовок
+        description: Описание
+        category: Категория
+        image: Фотография
+    hints:
+      bulletin:
+        title: Не более 50 символов
+        description: Не более 1000 символов
+        image: Файл должен быть в формате png или jpeg, весом не более 5 МБ.

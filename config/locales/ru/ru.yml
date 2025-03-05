@@ -4,7 +4,8 @@ ru:
       title: Доска объявлений
       new: Добавить
       home: Главная
-      my_bulletins: My bulletins
+      my_bulletins: Мои объявления
+      footer: © Хекслет %{year}
   navbar:
     login: Войти
     logout: Выйти

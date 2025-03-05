@@ -33,6 +33,7 @@ en:
     new: Add
     home: Home
     my_bulletins: My bulletins
+    footer: © Hexlet %{year}
   
   navbar:
     login: Log in

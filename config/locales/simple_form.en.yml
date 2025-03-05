@@ -5,11 +5,24 @@ en:
     required:
       text: 'required'
       mark: '*'
-      # You can uncomment the line below if you need to overwrite the whole required html.
-      # When using html, text and mark won't be used.
-      # html: '<abbr title="required">*</abbr>'
     error_notification:
       default_message: "Please review the problems below:"
+    labels:
+      bulletin:
+        new:
+          submit: Create bulletin
+        edit:
+          submit: Update
+        title: Title
+        description: Description
+        category: Category
+        image: Photo
+    hints:
+      bulletin:
+        title: No longer than 50
+        description: No longer than 1000
+        image: Less than 5 MB, available formats is jpg, png
+
     # Examples
     # labels:
     #   defaults:

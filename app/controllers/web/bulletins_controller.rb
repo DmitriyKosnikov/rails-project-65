@@ -1,6 +1,6 @@
 class Web::BulletinsController < ApplicationController
-  before_action :authenticate_user!, only: %i[new create]
-  before_action :set_bulletin, only: %i[show]
+  before_action :authenticate_user!, only: %i[new create edit update]
+  before_action :set_bulletin, only: %i[show edit update]
   def index
     @bulletins = Bulletin.order(created_at: :desc)
   end
@@ -11,23 +11,31 @@ class Web::BulletinsController < ApplicationController
     @bulletin = Bulletin.new
   end
 
-  def edit; end
+  def edit
+    return unless @bulletin.user_id != current_user.id
+
+    redirect_to @bulletin, notice: t('bulletins.actions.diff_user')
+  end
 
   def create
     @bulletin = current_user.bulletins.build(bulletin_params)
 
-    if @bulletin.save!
-      redirect_to bulletin_path(@bulletin), notice: t('bulletin.actions.create_success')
+    if @bulletin.save
+      redirect_to bulletin_path(@bulletin), notice: t('bulletins.actions.create_success')
     else
-      render :new, notice: t('bulletin.actions.create_failure')
+      render :new, status: :unprocessable_entity
     end
   end
 
   def update
-    if @bulletin.update(bulletin_params)
-      redirect_to @bulletin, notice: t('bulletin.actions.update_success')
+    if @bulletin.user_id == current_user.id
+      if @bulletin.update(bulletin_params)
+        redirect_to @bulletin, notice: t('bulletins.actions.update_success')
+      else
+        render :edit, status: :unprocessable_entity
+      end
     else
-      render :edit, notice: t('bulletin.actions.update_failure')
+      redirect_to @bulletin, notice: t('bulletins.actions.diff_user')
     end
   end
 

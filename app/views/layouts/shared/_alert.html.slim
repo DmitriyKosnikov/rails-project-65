@@ -1,6 +1,10 @@
-- if flash.any?
-  .container.my-2
-    - flash.to_hash.each_value do |msg|
-      .alert.alert-info.alert-dismissible.fade.show role = "alert"
-        = msg
-        button.btn-close aria-label="Close" data-bs-dismiss="alert" type="button"
+- if flash[:notice]
+  .container
+    .alert.alert-info.alert-dismissible.fade.show role="alert" data-controller="flash"
+      = flash[:notice]
+      button.btn-close type="button" data-bs-dismiss="alert" aria-label="Close"
+- if flash[:alert]
+  .container
+    .alert.alert-warning.alert-dismissible.fade.show role="alert" data-controller="flash"
+      = flash[:alert]
+      button.btn-close type="button" data-bs-dismiss="alert" aria-label="Close"
