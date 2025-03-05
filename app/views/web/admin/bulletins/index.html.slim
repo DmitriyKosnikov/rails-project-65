@@ -1,0 +1,9 @@
+.row
+  = render 'layouts/shared/admin/menu'
+  .col-md-9
+    h1.h2.mb-4 = t('')
+    .row.mt-2
+      table.table.table-borderless
+        thead
+          tr
+            th{ scope = 'col' } = t('activerecord.models.bulletin.attributes.title')

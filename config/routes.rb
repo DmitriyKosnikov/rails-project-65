@@ -7,5 +7,12 @@ Rails.application.routes.draw do
     resources :bulletins, except: :index
 
     root 'bulletins#index'
+
+    namespace :admin do
+      get '/', to: 'bulletins#moderation'
+
+      resources :bulletins
+      resources :categories
+    end
   end
 end

@@ -26,9 +26,7 @@ html
     = render 'layouts/shared/navbar'
     = render 'layouts/shared/alert'
     main
-      .mt-4.mb-5.pb-5
-        .container
-          = yield
+      = yield
     footer.footer.mt-auto.py-3.bg-light
       .container
       span.text-muted = t('application.footer', year: Time.current.year)

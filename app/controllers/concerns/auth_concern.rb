@@ -21,6 +21,10 @@ module AuthConcern
   end
 
   def authenticate_user!
-    redirect_to root_path unless current_user
+    redirect_to root_path, alert: t('bulletins.actions.need_login') unless current_user
+  end
+
+  def authenticate_admin!
+    redirect_to root_path, alert: t('bulletins.actions.not_admin') unless current_user&.admin?
   end
 end

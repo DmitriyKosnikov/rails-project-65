@@ -2,4 +2,10 @@ en:
   bulletins:
     actions:
       add: New bulletin
+      edit: Edit
+      create_success: Bulletin created successfully!
+      update_success: Bulletin updated successfully!
+      diff_user: This bulletin does not belongs to you!
+      need_login: You need to log in or sign up.
+      not_admin: You need to be admin.
     title: Bulletins
