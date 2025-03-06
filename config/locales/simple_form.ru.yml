@@ -15,6 +15,9 @@ ru:
         description: Описание
         category: Категория
         image: Фотография
+      category:
+        submit_new: Создать категорию
+        submit_edit: Подтвердить
     hints:
       bulletin:
         title: Не более 50 символов

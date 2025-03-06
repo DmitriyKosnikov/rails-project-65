@@ -11,3 +11,24 @@ two:
   description: MyText
   user: two
   category: two
+
+publish:
+  title: MyString
+  description: MyText
+  user: one
+  category: one
+  state: under_moderation
+
+reject:
+  title: MyString
+  description: MyText
+  user: one
+  category: two
+  state: under_moderation
+
+archive:
+  title: MyString
+  description: MyText
+  user: one
+  category: one
+  state: dunder_moderation

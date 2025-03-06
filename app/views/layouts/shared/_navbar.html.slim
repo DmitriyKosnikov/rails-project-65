@@ -7,11 +7,17 @@
           li.nav-item.me-2
             = link_to t('application.home'), root_path, class: 'nav-link text-dark'
           - if session[:user_id]
-            = link_to t('navbar.new'), new_bulletin_path, class: 'nav-link text-dark'
+            li.nav-item.me-2
+              = link_to t('navbar.new'), new_bulletin_path, class: 'nav-link text-dark'
+            li.nav-item.me-2
+              = link_to t('application.my_bulletins'), profile_path, class: 'nav-link text-dark'
     ul.nav.nav-pills
+      - if session[:user_id] && User.find(session[:user_id]).admin?
+        li.nav-item.me-2
+          = link_to t('application.admin'), admin_path, class: 'nav-link text-dark'
       li.nav-item.me-2
         - if session[:user_id]
-          = link_to t('navbar.logout'), logout_path, data: { 'turbo-method': :delete, 'turbo-confirm': 'Are you sure?' }, class: 'nav-link text-dark'
+          = link_to t('navbar.logout'), logout_path, data: { 'turbo-method': :delete, 'turbo-confirm': t('confirm') }, class: 'nav-link text-dark'
         - else
           = button_to auth_request_path(:github), method: :post,
           class: 'nav-link text-dark', data: { turbo: false } do

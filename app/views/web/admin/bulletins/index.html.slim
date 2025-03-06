@@ -1,9 +1,22 @@
 .row
   = render 'layouts/shared/admin/menu'
   .col-md-9
-    h1.h2.mb-4 = t('')
+    h1.h2.mb-4 = t('bulletins.title')
     .row.mt-2
       table.table.table-borderless
         thead
           tr
-            th{ scope = 'col' } = t('activerecord.models.bulletin.attributes.title')
+            th{ scope = 'col' } = t('admin.controllers.name')
+            th{ scope = 'col' } = t('activerecord.attributes.bulletin.state.name')
+            th{ scope = 'col' } = t('admin.controllers.creation_date')
+            th{ scope = 'col' } = t('admin.controllers.actions')
+        tbody
+          - @bulletins.each do |bulletin|
+            tr
+              td = link_to bulletin.title, bulletin_path(bulletin)
+              td = I18n.t("activerecord.attributes.bulletin.state.#{bulletin.state}")
+              td = distance_of_time_in_words(bulletin.created_at, Time.now.utc)
+              td
+                = link_to t('admin.controllers.show'), bulletin_path(bulletin), class: 'me-1'
+                - if bulletin.may_archive?
+                  = link_to t('admin.controllers.to_archive'), archive_bulletin_path(bulletin), class: 'text-danger'

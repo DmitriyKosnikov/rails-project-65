@@ -1,2 +1,6 @@
-h1 Web::Admin::Categories#new
-p Find me in app/views/web/admin/categories/new.html.slim
+.row
+  = render 'layouts/shared/admin/menu'
+  .col-md-9
+    h1.h2.mb-4 = t('category.edit_title')
+    .row.mt-2
+      == render 'form'

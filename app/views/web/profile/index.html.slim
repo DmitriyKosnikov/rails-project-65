@@ -1,0 +1,29 @@
+.mt-4.mb-5.pb-5
+  .container
+    .p-4.align-items-center.border.shadow.bg-white.rounded-3
+      .row
+        .p-3.p-lg-5.pt-lg-0
+          .mb-4
+            h2 = t('bulletins.my_bulletins')
+            hr
+            = link_to t('bulletins.add_title'), new_bulletin_path
+          .row.mt-2
+            table.table.table-borderless
+              thead
+                tr
+                  th{ scope = 'col' } = t('admin.controllers.name')
+                  th{ scope = 'col' } = t('activerecord.attributes.bulletin.state.name')
+                  th{ scope = 'col' } = t('admin.controllers.creation_date')
+                  th{ scope = 'col' } = t('admin.controllers.actions')
+              tbody
+                - @bulletins.each do |bulletin|
+                  tr
+                    td = link_to bulletin.title, bulletin_path(bulletin)
+                    td = I18n.t("activerecord.attributes.bulletin.state.#{bulletin.state}")
+                    td = distance_of_time_in_words(bulletin.created_at, Time.now.utc)
+                    td
+                      = link_to t('admin.controllers.show'), bulletin_path(bulletin), class: 'me-1'
+                      - if bulletin.may_to_moderate?
+                        = link_to t('admin.controllers.publish'), to_moderate_bulletin_path(bulletin), data: { 'turbo-method': :patch }, class: 'me-1'
+                      - if bulletin.may_archive?
+                        = link_to t('admin.controllers.to_archive'), archive_bulletin_path(bulletin), data: { 'turbo-method': :patch }, class: 'text-danger'

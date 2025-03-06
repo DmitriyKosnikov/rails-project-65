@@ -1,4 +1,5 @@
-= simple_form_for @category do |f|
+= simple_form_for(@category, url: @category.new_record? ? admin_categories_path : admin_category_path(@category),
+method: @category.new_record? ? :post : :patch) do |f|
   = f.input :name
 
   = f.submit @category.new_record? ? t('simple_form.labels.category.submit_new') : t('simple_form.labels.category.submit_edit'), class: 'btn btn-primary'

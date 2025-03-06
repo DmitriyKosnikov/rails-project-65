@@ -1,33 +1,35 @@
 require "test_helper"
 
 class Web::Admin::CategoriesControllerTest < ActionDispatch::IntegrationTest
-  # test "should get index" do
-  #   get web_admin_categories_index_url
-  #   assert_response :success
-  # end
+  setup do
+    @user = users(:admin)
+    @category = categories(:one)
+  end
+  test "should get create" do
+    post admin_categories_url, params: {
+      name: @category.name
+    }
 
-  # test "should get new" do
-  #   get web_admin_categories_new_url
-  #   assert_response :success
-  # end
+    assert_response :redirect
 
-  # test "should get create" do
-  #   get web_admin_categories_create_url
-  #   assert_response :success
-  # end
+    created_category = Category.find_by(
+      name: @category.name
+    )
 
-  # test "should get edit" do
-  #   get web_admin_categories_edit_url
-  #   assert_response :success
-  # end
+    assert(created_category)
+  end
 
-  # test "should get update" do
-  #   get web_admin_categories_update_url
-  #   assert_response :success
-  # end
+  test "should get update" do
+    patch admin_category_path(@category), params: {
+      name: @category.name
+    }
 
-  # test "should get delete" do
-  #   get web_admin_categories_delete_url
-  #   assert_response :success
-  # end
+    assert_response :redirect
+
+    updated_category = Category.find_by(
+      name: @category.name
+    )
+
+    assert(updated_category)
+  end
 end

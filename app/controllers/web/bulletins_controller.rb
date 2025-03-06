@@ -1,8 +1,10 @@
 class Web::BulletinsController < ApplicationController
+  include AASM
+
   before_action :authenticate_user!, only: %i[new create edit update]
-  before_action :set_bulletin, only: %i[show edit update]
+  before_action :set_bulletin, only: %i[show edit update to_moderate archive]
   def index
-    @bulletins = Bulletin.order(created_at: :desc)
+    @bulletins = Bulletin.where(state: :published).order(created_at: :desc)
   end
 
   def show; end
@@ -33,6 +35,32 @@ class Web::BulletinsController < ApplicationController
         redirect_to @bulletin, notice: t('bulletins.actions.update_success')
       else
         render :edit, status: :unprocessable_entity
+      end
+    else
+      redirect_to @bulletin, notice: t('bulletins.actions.diff_user')
+    end
+  end
+
+  def to_moderate
+    if @bulletin.user_id == current_user.id
+      if @bulletin.may_to_moderate?
+        @bulletin.to_moderate!
+        redirect_to profile_path, notice: t('admin.messages.success')
+      else
+        redirect_to profile_path, notice: t('admin.messages.failure')
+      end
+    else
+      redirect_to @bulletin, notice: t('bulletins.actions.diff_user')
+    end
+  end
+
+  def archive
+    if @bulletin.user_id == current_user.id
+      if @bulletin.may_archive?
+        @bulletin.archive!
+        redirect_to profile_path, notice: t('admin.messages.success')
+      else
+        redirect_to profile_path, notice: t('admin.messages.failure')
       end
     else
       redirect_to @bulletin, notice: t('bulletins.actions.diff_user')

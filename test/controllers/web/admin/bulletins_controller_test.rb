@@ -3,6 +3,9 @@ require "test_helper"
 class Web::Admin::BulletinsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @user = users(:admin)
+    @publish_bulletin = bulletins(:publish)
+    @reject_bulletin = bulletins(:reject)
+    @archive_bulletin = bulletins(:archive)
     sign_in(@user)
   end
 
@@ -11,8 +14,8 @@ class Web::Admin::BulletinsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  # test "should get moderation" do
-  #   get web_admin_bulletins_moderation_url
-  #   assert_response :success
-  # end
+  test "should redirect moderation" do
+    get admin_url
+    assert_response :success
+  end
 end

@@ -1,6 +1,6 @@
 module Web
   module Admin
-    class ApplicationController < Web::ApplicationController
+    class ApplicationController < ApplicationController
       include AuthConcern
       include Pundit::Authorization
     end

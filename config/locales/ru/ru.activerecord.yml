@@ -9,6 +9,16 @@ ru:
         title: Заголовок
         description: Описание
         image: Фотография
+        state:
+          archived: В архиве
+          draft: Черновик
+          published: Опубликовано
+          under_moderation: На модерации
+          rejected: Возвращено
+          name: Состояние
+      category:
+        id: ID
+        name: Название
     errors:
       models:
         bulletin:
@@ -23,6 +33,12 @@ ru:
               required: обязательное поле
             image:
               blank: обязательна
+        category:
+          attributes:
+            name:
+              blank: не может быть пустым
+              too_long: не может быть более 20 символов
+              too_short: не может быть менее 4 символов
     models:
       user: Пользователь
       bulletin: Объявление

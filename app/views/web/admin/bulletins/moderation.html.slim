@@ -1,2 +1,21 @@
-h1 Web::Admin::Bulletins#moderation
-p Find me in app/views/web/admin/bulletins/moderation.html.slim
+.row
+  = render 'layouts/shared/admin/menu'
+  .col-md-9
+    h1.h2.mb-4 = t('bulletins.moderated')
+    .row.mt-2
+      table.table.table-borderless
+        thead
+          tr
+            th{ scope = 'col' } = t('activerecord.attributes.category.name')
+            th{ scope = 'col' } = t('admin.controllers.creation_date')
+            th{ scope = 'col' } = t('admin.controllers.actions')
+          tbody
+          - @bulletins.each do |bulletin|
+            tr
+              td = link_to bulletin.title, bulletin_path(bulletin)
+              td = distance_of_time_in_words(bulletin.created_at, Time.now.utc)
+              td
+                = link_to t('admin.controllers.publish'), publish_admin_bulletin_path(bulletin), data: { 'turbo-method': :patch }, class: 'me-1'
+                = link_to t('admin.controllers.reject'), reject_admin_bulletin_path(bulletin), data: { 'turbo-method': :patch }, class: 'me-1'
+                = link_to t('admin.controllers.archive_moder'), archive_admin_bulletin_path(bulletin),
+                data: { 'turbo-method': :patch }, class: 'text-danger'

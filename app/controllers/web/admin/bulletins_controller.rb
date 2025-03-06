@@ -1,10 +1,45 @@
-class Web::Admin::BulletinsController < ApplicationController
+class Web::Admin::BulletinsController < Web::Admin::ApplicationController
   before_action :authenticate_user!
   before_action :authenticate_admin!
+  before_action :set_bulletin, only: %i[reject publish archive]
   def index
     @bulletins = Bulletin.all
   end
 
   def moderation
+    @bulletins = Bulletin.where(state: :under_moderation)
+  end
+
+  def reject
+    if @bulletin.may_reject?
+      @bulletin.reject!
+      redirect_to admin_path, notice: t('admin.messages.success')
+    else
+      redirect_to admin_path, notice: t('admin.messages.failure')
+    end
+  end
+
+  def publish
+    if @bulletin.may_publish?
+      @bulletin.publish!
+      redirect_to admin_path, notice: t('admin.messages.success')
+    else
+      redirect_to admin_path, notice: t('admin.messages.failure')
+    end
+  end
+
+  def archive
+    if @bulletin.may_archive?
+      @bulletin.archive!
+      redirect_to admin_path, notice: t('admin.messages.success')
+    else
+      redirect_to admin_path, notice: t('admin.messages.failure')
+    end
+  end
+
+  private
+
+  def set_bulletin
+    @bulletin = Bulletin.find(params[:id])
   end
 end

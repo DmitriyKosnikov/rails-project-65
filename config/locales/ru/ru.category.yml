@@ -1,0 +1,10 @@
+ru:
+  category:
+    actions:
+      create_success: Категория создана успешно!
+      update_success: Категория успешна обновлена!
+      destroy_success: Категория успешно удалена!
+    title: Категории
+    add_category: Добавить категорию
+    edit_title: Редактировать категорию
+    new_title: Новая категория
