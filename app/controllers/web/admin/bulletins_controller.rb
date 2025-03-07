@@ -3,7 +3,8 @@ class Web::Admin::BulletinsController < Web::Admin::ApplicationController
   before_action :authenticate_admin!
   before_action :set_bulletin, only: %i[reject publish archive]
   def index
-    @bulletins = Bulletin.all
+    @q = Bulletin.ransack(params[:q])
+    @bulletins = @q.result(distinct: true).page(params[:page])
   end
 
   def moderation

@@ -1,0 +1,8 @@
+ru:
+  search_form:
+    search: Искать
+    cancel: Сброс
+    bulletin:
+      title: Искать по названию объявления
+      category: Выбрать категорию
+      state: По состоянию

@@ -18,6 +18,8 @@ gem "cssbundling-rails"
 gem "jbuilder"
 
 gem "aasm"
+gem 'ransack'
+gem 'kaminari'
 
 # Sentry SDK
 gem "stackprof"
@@ -27,6 +29,9 @@ gem "sentry-rails"
 gem 'dotenv-rails'
 
 gem 'active_storage_validations'
+gem 'aws-sdk-s3'
+gem 'file_validators'
+gem 'image_processing'
 
 # Gems for tests
 gem 'faker'

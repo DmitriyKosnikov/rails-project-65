@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
     get 'profile', to: 'profile#index'
 
-    resources :bulletins, except: :index do
+    resources :bulletins do
       member do
         patch :to_moderate
         patch :archive

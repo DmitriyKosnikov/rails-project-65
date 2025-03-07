@@ -4,7 +4,12 @@ class Web::BulletinsController < ApplicationController
   before_action :authenticate_user!, only: %i[new create edit update]
   before_action :set_bulletin, only: %i[show edit update to_moderate archive]
   def index
-    @bulletins = Bulletin.where(state: :published).order(created_at: :desc)
+    @q = Bulletin.ransack(params[:q])
+    @bulletins = @q.result(distinct: true)
+                   .published
+                   .order(created_at: :desc)
+                   .page(params[:page])
+                   .per(12)
   end
 
   def show; end

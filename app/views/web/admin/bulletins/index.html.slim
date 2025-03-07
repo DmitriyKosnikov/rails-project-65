@@ -2,6 +2,7 @@
   = render 'layouts/shared/admin/menu'
   .col-md-9
     h1.h2.mb-4 = t('bulletins.title')
+    = render 'search'
     .row.mt-2
       table.table.table-borderless
         thead
@@ -19,4 +20,5 @@
               td
                 = link_to t('admin.controllers.show'), bulletin_path(bulletin), class: 'me-1'
                 - if bulletin.may_archive?
-                  = link_to t('admin.controllers.to_archive'), archive_bulletin_path(bulletin), class: 'text-danger'
+                  = link_to t('admin.controllers.to_archive'), archive_bulletin_path(bulletin), data: { 'turbo-method': :patch }, class: 'text-danger'
+  = paginate(@bulletins)

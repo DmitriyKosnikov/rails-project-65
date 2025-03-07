@@ -1,0 +1,14 @@
+.p-3.bg-light
+  = search_form_for @q do |f|
+    .row.my-2
+      .col-6
+        .form-group.mb-3.string.required.q_title_cont
+          = f.search_field :title_cont, label: false, class: 'form-control', id: 'q_title_cont'
+        small.form-text.text-muted = t('search_form.bulletin.title')
+      .col-4
+        .form-group.mb-3.string.required.q_category_id_eq
+          = f.input :category_id_eq, label: false, collection: Category.all.map { |c| [c.name, c.id] }, class: 'form-control', id: 'q_category_id_eq'
+        .small.form-text.text-muted = t('search_form.bulletin.category')
+      .col-2
+        = f.submit t('search_form.search'), class: 'btn btn-primary me-2'
+        = link_to t('search_form.cancel'), root_path, class: 'btn btn-outline-primary'

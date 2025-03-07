@@ -6,6 +6,7 @@
           .mb-4
             h2 = t('bulletins.title')
             hr
+          = render 'search'
           .row.mt-2
             - @bulletins.each do |bulletin|
               .col-3.pt-2
@@ -16,3 +17,4 @@
                       a = link_to bulletin.title, bulletin_path(bulletin)
                     .card-subtitle.mb-2.text-muted
                       h6 = distance_of_time_in_words(bulletin.created_at, Time.now.utc)
+          = paginate @bulletins
