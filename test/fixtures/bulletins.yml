@@ -17,7 +17,7 @@ publish:
   description: MyText
   user: one
   category: one
-  state: under_moderation
+  state: :under_moderation
 
 reject:
   title: MyString
@@ -31,4 +31,4 @@ archive:
   description: MyText
   user: one
   category: one
-  state: dunder_moderation
+  state: :under_moderation

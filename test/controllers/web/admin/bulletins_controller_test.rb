@@ -1,6 +1,7 @@
 require "test_helper"
 
 class Web::Admin::BulletinsControllerTest < ActionDispatch::IntegrationTest
+  include AASM
   setup do
     @user = users(:admin)
     @publish_bulletin = bulletins(:publish)
@@ -14,7 +15,7 @@ class Web::Admin::BulletinsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should redirect moderation" do
+  test "should get moderation" do
     get admin_url
     assert_response :success
   end
