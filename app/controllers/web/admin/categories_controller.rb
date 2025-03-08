@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Web::Admin::CategoriesController < Web::Admin::ApplicationController
   before_action :set_category, only: %i[edit update destroy]
 
@@ -38,7 +40,7 @@ class Web::Admin::CategoriesController < Web::Admin::ApplicationController
   private
 
   def category_params
-    params.require(:category).permit(:name)
+    params.expect(category: [:name])
   end
 
   def set_category

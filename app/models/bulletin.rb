@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Bulletin < ApplicationRecord
   include AASM
   ACCEPTED_CONTENT_TYPES = ['image/png', 'image/jpeg'].freeze

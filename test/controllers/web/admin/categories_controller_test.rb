@@ -1,11 +1,13 @@
-require "test_helper"
+# frozen_string_literal: true
+
+require 'test_helper'
 
 class Web::Admin::CategoriesControllerTest < ActionDispatch::IntegrationTest
   setup do
     @user = users(:admin)
     @category = categories(:one)
   end
-  test "should get create" do
+  test 'should get create' do
     post admin_categories_url, params: {
       name: @category.name
     }
@@ -19,7 +21,7 @@ class Web::Admin::CategoriesControllerTest < ActionDispatch::IntegrationTest
     assert(created_category)
   end
 
-  test "should get update" do
+  test 'should get update' do
     patch admin_category_path(@category), params: {
       name: @category.name
     }

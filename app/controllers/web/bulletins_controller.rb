@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Web::BulletinsController < ApplicationController
   include AASM
 

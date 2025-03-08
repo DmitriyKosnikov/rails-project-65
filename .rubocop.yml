@@ -1,24 +1,21 @@
+---
 inherit_from: .rubocop_todo.yml
+
+AllCops:
+  TargetRubyVersion: 3.2.2
+  NewCops: enable
+  Exclude:
+    - 'code/bin/**'
+    - 'code/db/schema.rb'
+    - 'code/db/migrate/**'
+    - 'code/vendor/**/*'
+    - 'code/node_modules/**/*'
+    - 'vendor/**/*'
+    - 'node_modules/**/*'
+  SuggestExtensions: false
 
 require:
   - rubocop-rails
-
-AllCops:
-  NewCops: enable
-  TargetRubyVersion: 3.2.2
-  TargetRailsVersion: 7
-  DisplayCopNames: true
-  Exclude:
-    - './bin/**'
-    - './db/schema.rb'
-    - './db/migrate/**'
-    - './db/data_schema.rb'
-    - './vendor/**/*'
-    - './node_modules/**/*'
-    - 'vendor/**/*'
-    - 'node_modules/**/*'
-    - './tmp/**/*'
-  SuggestExtensions: false
 
 Rails:
   Enabled: true
@@ -45,7 +42,4 @@ Metrics/BlockLength:
   Enabled: false
 
 Style/AsciiComments:
-  Enabled: false
-
-Metrics/ParameterLists:
   Enabled: false

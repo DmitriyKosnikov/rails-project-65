@@ -1,4 +1,6 @@
-require "test_helper"
+# frozen_string_literal: true
+
+require 'test_helper'
 
 class Web::Admin::BulletinsControllerTest < ActionDispatch::IntegrationTest
   include AASM
@@ -10,12 +12,12 @@ class Web::Admin::BulletinsControllerTest < ActionDispatch::IntegrationTest
     sign_in(@user)
   end
 
-  test "should get index" do
+  test 'should get index' do
     get admin_bulletins_url
     assert_response :success
   end
 
-  test "should get moderation" do
+  test 'should get moderation' do
     get admin_url
     assert_response :success
   end

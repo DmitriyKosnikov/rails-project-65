@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 IMAGES_NAMES = %w[restaurant_1.jpg restaurant_2.jpg restaurant_3.jpg restaurant_5.jpg restaurant_6.jpg].freeze
 
 # 15.times do
