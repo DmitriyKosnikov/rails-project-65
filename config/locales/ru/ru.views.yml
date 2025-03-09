@@ -5,3 +5,4 @@ ru:
       previous: '<'
       next: '>'
       last: '>>'
+      truncate: '...'
