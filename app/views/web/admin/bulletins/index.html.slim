@@ -21,4 +21,5 @@
                 = link_to t('admin.controllers.show'), bulletin_path(bulletin), class: 'me-1'
                 - if bulletin.may_archive?
                   = link_to t('admin.controllers.to_archive'), archive_bulletin_path(bulletin), data: { 'turbo-method': :patch }, class: 'text-danger'
-  = paginate(@bulletins)
+    .mt-4
+      = paginate(@bulletins)

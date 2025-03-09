@@ -160,6 +160,9 @@ GEM
     globalid (1.2.1)
       activesupport (>= 6.1)
     hashie (5.0.0)
+    hpricot (0.8.6)
+    html2slim (0.2.0)
+      hpricot
     i18n (1.14.7)
       concurrent-ruby (~> 1.0)
     image_processing (1.14.0)
@@ -485,6 +488,7 @@ DEPENDENCIES
   dotenv-rails
   faker
   file_validators
+  html2slim
   image_processing
   jbuilder
   jsbundling-rails

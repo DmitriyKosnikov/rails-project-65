@@ -17,4 +17,5 @@
                       a = link_to bulletin.title, bulletin_path(bulletin)
                     .card-subtitle.mb-2.text-muted
                       h6 = distance_of_time_in_words(bulletin.created_at, Time.now.utc)
-          = paginate @bulletins
+          .mt-4
+            = paginate @bulletins
