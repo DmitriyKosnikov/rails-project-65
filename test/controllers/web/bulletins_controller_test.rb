@@ -5,6 +5,14 @@ require 'test_helper'
 class BulletinsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @bulletin = bulletins(:one)
+
+    @bulletin.image.attach(
+      io: Rails.root.join('test/fixtures/files/test_image.jpg').open,
+      filename: 'test_image.jpg',
+      content_type: 'image/jpeg'
+    )
+    @bulletin.save
+
     @state_bulletin = bulletins(:two)
     @user = users(:one)
     @category = categories(:one)
@@ -13,6 +21,12 @@ class BulletinsControllerTest < ActionDispatch::IntegrationTest
 
   test 'should get index' do
     get root_url
+
+    assert_response :success
+  end
+
+  test 'should show bulletin' do
+    get bulletin_url(@bulletin)
 
     assert_response :success
   end
