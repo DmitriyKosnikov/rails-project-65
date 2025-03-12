@@ -6,9 +6,12 @@ require 'rails/test_help'
 require 'minitest'
 require 'minitest-power_assert'
 require 'minitest/mock'
-require 'aasm/minitest'
 
 OmniAuth.config.test_mode = true
+
+Minitest.after_run do
+  FileUtils.rm_rf(ActiveStorage::Blob.services.fetch(:test_fixtures).root)
+end
 
 module ActiveSupport
   class TestCase

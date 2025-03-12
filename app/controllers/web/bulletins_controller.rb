@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class Web::BulletinsController < ApplicationController
-  include AASM
-
   before_action :authenticate_user!, only: %i[new create edit update]
   before_action :set_bulletin, only: %i[show edit update to_moderate archive]
   def index
@@ -60,6 +58,7 @@ class Web::BulletinsController < ApplicationController
 
     if @bulletin.may_archive?
       @bulletin.archive!
+
       redirect_to profile_path, notice: t('admin.messages.success')
     else
       redirect_to profile_path, notice: t('admin.messages.failure')

@@ -5,7 +5,7 @@ require 'test_helper'
 class BulletinsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @bulletin = bulletins(:one)
-    @bulletin.image.attach(file_fixture_upload('test_image.jpg', 'image/jpg'))
+    @state_bulletin = bulletins(:two)
     @user = users(:one)
     @category = categories(:one)
     sign_in(@user)
@@ -66,30 +66,38 @@ class BulletinsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'PATCH to_moderate transitions bulletin to under_moderation' do
-    bulletin_mock = Minitest::Mock.new
+    @state_bulletin.image.attach(
+      io: Rails.root.join('test/fixtures/files/test_image.jpg').open,
+      filename: 'test_image.jpg',
+      content_type: 'image/jpeg'
+    )
 
-    bulletin_mock.expect(:may_to_moderate?, true)
+    @state_bulletin.save
 
-    bulletin_mock.expect(:to_moderate!, true)
-
-    @controller.instance_variable_set(:@bulletin, bulletin_mock)
-
-    patch to_moderate_bulletin_path(@bulletin)
+    patch to_moderate_bulletin_path(@state_bulletin)
 
     assert_redirected_to profile_path
     assert_equal flash[:notice], I18n.t('admin.messages.success')
 
-    @bulletin.reload
-    assert @bulletin.under_moderation?
+    @state_bulletin.reload
+    assert @state_bulletin.under_moderation?
   end
 
   test 'PATCH archive transitions bulletin to archived' do
-    patch archive_bulletin_path(@bulletin)
+    @state_bulletin.image.attach(
+      io: Rails.root.join('test/fixtures/files/test_image.jpg').open,
+      filename: 'test_image.jpg',
+      content_type: 'image/jpeg'
+    )
+
+    @state_bulletin.save
+
+    patch archive_bulletin_path(@state_bulletin)
 
     assert_redirected_to profile_path
     assert_equal flash[:notice], I18n.t('admin.messages.success')
 
-    @bulletin.reload
-    assert @bulletin.archived?
+    @state_bulletin.reload
+    assert @state_bulletin.archived?
   end
 end

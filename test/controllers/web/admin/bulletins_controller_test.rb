@@ -23,14 +23,56 @@ class Web::Admin::BulletinsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'PATCH reject transitions bulletin to rejected' do
-    @reject_bulletin.to_moderate!
+    @reject_bulletin.image.attach(
+      io: Rails.root.join('test/fixtures/files/test_image.jpg').open,
+      filename: 'test_image.jpg',
+      content_type: 'image/jpeg'
+    )
+
+    @reject_bulletin.save
+
+    patch reject_admin_bulletin_path(@reject_bulletin)
+
+    assert_redirected_to admin_path
+    assert_equal flash[:notice], I18n.t('admin.messages.success')
+
+    @reject_bulletin.reload
+    assert @reject_bulletin.rejected?
   end
 
   test 'PATCH publish transitions bulletin to published' do
-    @publish_bulletin.to_moderate!
+    @publish_bulletin.image.attach(
+      io: Rails.root.join('test/fixtures/files/test_image.jpg').open,
+      filename: 'test_image.jpg',
+      content_type: 'image/jpeg'
+    )
+
+    @publish_bulletin.save
+
+    patch publish_admin_bulletin_path(@publish_bulletin)
+
+    assert_redirected_to admin_path
+    assert_equal flash[:notice], I18n.t('admin.messages.success')
+
+    @publish_bulletin.reload
+    assert @publish_bulletin.published?
   end
 
   test 'PATCH archive bulletin to archived' do
-    patch archive_admin
+    @archive_bulletin.image.attach(
+      io: Rails.root.join('test/fixtures/files/test_image.jpg').open,
+      filename: 'test_image.jpg',
+      content_type: 'image/jpeg'
+    )
+
+    @archive_bulletin.save
+
+    patch archive_admin_bulletin_path(@archive_bulletin)
+
+    assert_redirected_to admin_path
+    assert_equal flash[:notice], I18n.t('admin.messages.success')
+
+    @archive_bulletin.reload
+    assert @archive_bulletin.archived?
   end
 end
