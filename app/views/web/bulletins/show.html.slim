@@ -14,4 +14,4 @@
             .col-4
               .card
                 .card-body
-                  h1.h5.card-title = "User ##{@bulletin.user_id}"
+                  h1.h5.card-title = "#{User.find(@bulletin.user_id).name}"

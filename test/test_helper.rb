@@ -3,6 +3,9 @@
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
 require 'rails/test_help'
+require 'minitest'
+require 'minitest-power_assert'
+require 'minitest/mock'
 require 'aasm/minitest'
 
 OmniAuth.config.test_mode = true

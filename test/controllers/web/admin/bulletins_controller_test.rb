@@ -21,4 +21,16 @@ class Web::Admin::BulletinsControllerTest < ActionDispatch::IntegrationTest
     get admin_url
     assert_response :success
   end
+
+  test 'PATCH reject transitions bulletin to rejected' do
+    @reject_bulletin.to_moderate!
+  end
+
+  test 'PATCH publish transitions bulletin to published' do
+    @publish_bulletin.to_moderate!
+  end
+
+  test 'PATCH archive bulletin to archived' do
+    patch archive_admin
+  end
 end

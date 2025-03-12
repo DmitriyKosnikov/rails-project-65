@@ -32,9 +32,13 @@ class Web::Admin::CategoriesController < Web::Admin::ApplicationController
   end
 
   def destroy
-    @category.destroy!
+    if @category.bulletins.any?
+      redirect_to admin_categories_path, notice: t('category.actions.destroy_has_bulletins')
+    else
+      @category.destroy!
 
-    redirect_to admin_categories_path, notice: t('category.actions.destroy_success')
+      redirect_to admin_categories_path, notice: t('category.actions.destroy_success')
+    end
   end
 
   private

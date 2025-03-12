@@ -21,9 +21,7 @@ class Web::BulletinsController < ApplicationController
   end
 
   def edit
-    return unless @bulletin.user_id != current_user.id
-
-    redirect_to @bulletin, notice: t('bulletins.actions.diff_user')
+    authorize @bulletin
   end
 
   def create
@@ -37,44 +35,42 @@ class Web::BulletinsController < ApplicationController
   end
 
   def update
-    if @bulletin.user_id == current_user.id
-      if @bulletin.update(bulletin_params)
-        redirect_to @bulletin, notice: t('bulletins.actions.update_success')
-      else
-        render :edit, status: :unprocessable_entity
-      end
+    authorize @bulletin
+
+    if @bulletin.update(bulletin_params)
+      redirect_to @bulletin, notice: t('bulletins.actions.update_success')
     else
-      redirect_to @bulletin, notice: t('bulletins.actions.diff_user')
+      render :edit, status: :unprocessable_entity
     end
   end
 
   def to_moderate
-    if @bulletin.user_id == current_user.id
-      if @bulletin.may_to_moderate?
-        @bulletin.to_moderate!
-        redirect_to profile_path, notice: t('admin.messages.success')
-      else
-        redirect_to profile_path, notice: t('admin.messages.failure')
-      end
+    authorize @bulletin
+
+    if @bulletin.may_to_moderate?
+      @bulletin.to_moderate!
+      redirect_to profile_path, notice: t('admin.messages.success')
     else
-      redirect_to @bulletin, notice: t('bulletins.actions.diff_user')
+      redirect_to profile_path, notice: t('admin.messages.failure')
     end
   end
 
   def archive
-    if @bulletin.user_id == current_user.id
-      if @bulletin.may_archive?
-        @bulletin.archive!
-        redirect_to profile_path, notice: t('admin.messages.success')
-      else
-        redirect_to profile_path, notice: t('admin.messages.failure')
-      end
+    authorize @bulletin
+
+    if @bulletin.may_archive?
+      @bulletin.archive!
+      redirect_to profile_path, notice: t('admin.messages.success')
     else
-      redirect_to @bulletin, notice: t('bulletins.actions.diff_user')
+      redirect_to profile_path, notice: t('admin.messages.failure')
     end
   end
 
   private
+
+  def user_not_authorized
+    redirect_to bulletin_path(@bulletin), notice: t('bulletins.actions.diff_user')
+  end
 
   def set_bulletin
     @bulletin = Bulletin.find(params[:id])
